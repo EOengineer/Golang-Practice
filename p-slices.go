@@ -32,25 +32,29 @@ package main
     family := []*Person{finley, candice, eric}
 
     // print original momory addresses
-    fmt.Printf("Original address %p\n", family[0])
-    fmt.Printf("Original address %p\n", family[1])
-    fmt.Printf("Original address %p\n", family[2])
+    whatAmI("Orginal", family)
 
-    // sorting not yet implemented.
-    // currently serves to prove in place function handoff
+    // re-order slice based on Rank
     sortedFamily := sortByRank(family)
 
-    fmt.Printf("New address %p\n", sortedFamily[0])
-    fmt.Printf("New address %p\n", sortedFamily[1])
-    fmt.Printf("New address %p\n", sortedFamily[2])
+    // print memory addresses after sort
+    whatAmI("New address", sortedFamily)
+  }
+
+
+
+  func whatAmI(str string, arr []*Person) {
+    for _, person := range arr {
+      fmt.Printf("Name is %s and Rank is %d\n", person.Name, person.Rank)
+      fmt.Printf("%s Address is %p\n", str, person)
+    }
   }
 
   func sortByRank(arr []*Person) ([]*Person){
-    for _, person := range arr {
-      // these memory addresses will match those above, no duplicated objects created.
-      fmt.Printf("Name is %s and Rank is %d\n", person.Name, person.Rank)
-      fmt.Printf("Inner Loop Address is %p\n", person)
-    }
-    test := []*Person{arr[2], arr[1], arr[0]}
-    return test
+    // sort coming soon
+    temp := arr[0]
+    arr[0] = arr[2]
+    arr[2] = temp
+    return arr
   }
+
